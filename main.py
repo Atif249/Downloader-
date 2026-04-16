@@ -1,12 +1,23 @@
 import yt_dlp
+import os
 
 def download_video(url):
+    # Home directory path
+    home = os.path.expanduser("~")
+
+    # Folder path
+    folder = os.path.join(home, "Atif Downloader")
+
+    # Agar folder exist nahi karta to bana do
+    if not os.path.exists(folder):
+        os.makedirs(folder)
+
     ydl_opts = {
-        # Best video + audio (1080p max, warna best)
+        # Best video + audio
         'format': 'bestvideo[height<=1080]+bestaudio/best',
 
-        # File name
-        'outtmpl': '%(title)s.%(ext)s',
+        # Save inside folder
+        'outtmpl': os.path.join(folder, '%(title)s.%(ext)s'),
 
         # Merge into mp4
         'merge_output_format': 'mp4',
@@ -16,7 +27,8 @@ def download_video(url):
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             ydl.download([url])
 
-        print("\n✅ Download Complete with Audio!")
+        print(f"\n✅ Download Complete!")
+        print(f"📁 Saved in: {folder}")
 
     except Exception as e:
         print("\n❌ Error:", e)
