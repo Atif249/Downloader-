@@ -14,16 +14,9 @@ class C:
     BOLD = '\033[1m'
 
 
-# 🔊 SOUND FUNCTION
+# 🔊 SOUND (safe for all systems)
 def play_sound():
-    try:
-        os.system("termux-beep")
-    except:
-        try:
-            import winsound
-            winsound.Beep(1000, 500)
-        except:
-            print("🔊")
+    print('\a')  # simple beep (no error)
 
 
 # 🔄 AUTO UPDATE
@@ -54,15 +47,22 @@ def intro():
     os.system('cls' if os.name == 'nt' else 'clear')
 
     title = """
-   ██╗   ██╗████████╗
-   ╚██╗ ██╔╝╚══██╔══╝
-    ╚████╔╝    ██║
-     ╚██╔╝     ██║
-      ██║      ██║
-      ╚═╝      ╚═╝
+ ██╗   ██╗████████╗
+ ╚██╗ ██╔╝╚══██╔══╝
+  ╚████╔╝    ██║
+   ╚██╔╝     ██║
+    ██║      ██║
+    ╚═╝      ╚═╝
 
-   TK • FB • YT DOWNLOADER
-        By Atif 🚀
+ ████████╗██╗  ██╗
+ ╚══██╔══╝██║ ██╔╝
+    ██║   █████╔╝ 
+    ██║   ██╔═██╗ 
+    ██║   ██║  ██╗
+    ╚═╝   ╚═╝  ╚═╝
+
+     YT • FB • TK DOWNLOADER
+          By Atif 🚀
 """
 
     print(C.CYAN + C.BOLD)
@@ -120,7 +120,7 @@ def download_video(url):
         'outtmpl': os.path.join(folder, '%(title)s.%(ext)s'),
         'merge_output_format': 'mp4',
         'progress_hooks': [progress_hook],
-        'js_runtimes': ['node'],  # ✅ FIX ADDED
+        'js_runtimes': {'node': {}},  # ✅ FIXED
     }
 
     try:
