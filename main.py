@@ -17,7 +17,7 @@ class C:
 # 🔊 SOUND FUNCTION
 def play_sound():
     try:
-        os.system("termux-beep")  # Termux
+        os.system("termux-beep")
     except:
         try:
             import winsound
@@ -120,6 +120,7 @@ def download_video(url):
         'outtmpl': os.path.join(folder, '%(title)s.%(ext)s'),
         'merge_output_format': 'mp4',
         'progress_hooks': [progress_hook],
+        'js_runtimes': ['node'],  # ✅ FIX ADDED
     }
 
     try:
